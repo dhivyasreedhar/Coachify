@@ -1,0 +1,68 @@
+{
+  "pageant_info": {
+    "name": "Pageant",
+    "values": [
+      "leadership",
+      "service",
+      "excellence"
+    ],
+    "current_issue": "community service",
+    "current_issues": [
+      "community service"
+    ]
+  },
+  "contestant_info": {
+    "experiences": [],
+    "skills": [
+      "public speaking",
+      "leadership",
+      "community service"
+    ],
+    "name": "Contestant",
+    "demographic": "young women"
+  },
+  "script": [
+    {
+      "type": "introduction",
+      "question": "Welcome, Contestant! It's great to have you with us. To start, could you tell us a little about your journey and what motivated you to participate in this pageant?"
+    },
+    {
+      "type": "skill",
+      "question": "You highlighted your talent in public speaking. Could you tell us about a time when this skill gave you an edge or helped you overcome a challenge?"
+    },
+    {
+      "type": "skill",
+      "question": "How do you continue to improve your leadership and stay at the top of your game for pageant events?"
+    },
+    {
+      "type": "pageant_values",
+      "question": "We are deeply committed to leadership. Can you share an experience where you worked towards upholding this value in your community?"
+    },
+    {
+      "type": "pageant_values",
+      "question": "Our pageant values service. Can you tell us how you've demonstrated this value in your life?"
+    },
+    {
+      "type": "behavioral",
+      "question": "Describe a situation where you had to deal with a difficult contestant or judge. How did you manage the situation?"
+    },
+    {
+      "type": "situational",
+      "question": "If you were to win the title today, how would you use the platform to influence positive change in your community?"
+    },
+    {
+      "type": "situational",
+      "question": "Imagine you have to speak at a major event with little preparation. How would you handle the situation?"
+    },
+    {
+      "type": "world_issue",
+      "question": "How do you think your generation can contribute to solving community service?"
+    },
+    {
+      "type": "closing",
+      "question": "Thank you for sharing your journey with us today, Contestant. Is there anything else you'd like to share with us about your vision as a potential winner?"
+    }
+  ],
+  "interview_duration": 1,
+  "created_at": "2025-04-13T11:15:49.190136"
+}

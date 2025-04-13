@@ -1,0 +1,68 @@
+{
+  "pageant_info": {
+    "name": "Pageant",
+    "values": [
+      "leadership",
+      "service",
+      "excellence"
+    ],
+    "current_issue": "community service",
+    "current_issues": [
+      "community service"
+    ]
+  },
+  "contestant_info": {
+    "experiences": [],
+    "skills": [
+      "public speaking",
+      "leadership",
+      "community service"
+    ],
+    "name": "Contestant",
+    "demographic": "young women"
+  },
+  "script": [
+    {
+      "type": "introduction",
+      "question": "Hi Contestant, we're thrilled to have you today. Could you share with us your story and why you believe you're a great fit for this pageant?"
+    },
+    {
+      "type": "skill",
+      "question": "How do you continue to improve your public speaking and stay at the top of your game for pageant events?"
+    },
+    {
+      "type": "pageant_values",
+      "question": "We are deeply committed to leadership. Can you share an experience where you worked towards upholding this value in your community?"
+    },
+    {
+      "type": "pageant_values",
+      "question": "One of our key values is service. How have you embodied this value throughout your journey, and how do you plan to continue doing so?"
+    },
+    {
+      "type": "behavioral",
+      "question": "Tell us about a challenging moment during your pageant journey. How did you handle the stress, and what did you learn from it?"
+    },
+    {
+      "type": "behavioral",
+      "question": "Describe a situation where you had to deal with a difficult contestant or judge. How did you manage the situation?"
+    },
+    {
+      "type": "situational",
+      "question": "Imagine you have to speak at a major event with little preparation. How would you handle the situation?"
+    },
+    {
+      "type": "situational",
+      "question": "If you were to win the title today, how would you use the platform to influence positive change in your community?"
+    },
+    {
+      "type": "world_issue",
+      "question": "If you had the opportunity to address world leaders about community service, what would be your main message?"
+    },
+    {
+      "type": "closing",
+      "question": "You've given us a lot to think about today. Before we conclude, do you have any final words or questions about the competition or next steps?"
+    }
+  ],
+  "interview_duration": 1,
+  "created_at": "2025-04-13T11:55:38.440351"
+}

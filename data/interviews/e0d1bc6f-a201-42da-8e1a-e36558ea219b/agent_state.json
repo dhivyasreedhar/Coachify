@@ -1,0 +1,77 @@
+{
+  "pageant_info": {
+    "values": [
+      ""
+    ],
+    "current_social_focus": "",
+    "name": "Pageant",
+    "current_issue": "community service",
+    "current_issues": [
+      "community service"
+    ]
+  },
+  "contestant_info": {
+    "experiences": [],
+    "skills": [
+      "\u2022 Public Speaking",
+      "\u2022 Community Organizing",
+      "\u2022 Leadership",
+      "\u2022 Social Media Advocacy"
+    ],
+    "personal_profile": [],
+    "name": "Emily Rodriguez",
+    "age": "22",
+    "hometown": "Portland, Oregon",
+    "community_involvement": [
+      "\u2022 Founded local youth mentorship program",
+      "\u2022 Volunteer STEM educator for girls",
+      "\u2022 Environmental conservation activist"
+    ],
+    "personal_goals": [
+      "\u2022 Promote educational opportunities for underserved communities",
+      "\u2022 Develop leadership programs for young women",
+      "\u2022 Use pageant platform to raise awareness about educational inequality"
+    ],
+    "demographic": "young women"
+  },
+  "script": [
+    {
+      "type": "introduction",
+      "question": "Welcome, Emily Rodriguez! It's great to have you with us. To start, could you tell us a little about your journey and what motivated you to participate in this pageant?"
+    },
+    {
+      "type": "skill",
+      "question": "Your profile mentions \u2022 Public Speaking. Could you walk us through a moment when this skill was essential to your success in a public setting?"
+    },
+    {
+      "type": "pageant_values",
+      "question": "Our pageant values . Can you tell us how you've demonstrated this value in your life?"
+    },
+    {
+      "type": "behavioral",
+      "question": "Can you share an instance where you had to quickly think on your feet during an event or stage performance?"
+    },
+    {
+      "type": "behavioral",
+      "question": "Describe a situation where you had to deal with a difficult contestant or judge. How did you manage the situation?"
+    },
+    {
+      "type": "situational",
+      "question": "If you faced a setback during your competition, how would you keep yourself motivated to push forward?"
+    },
+    {
+      "type": "situational",
+      "question": "If you were to win the title today, how would you use the platform to influence positive change in your community?"
+    },
+    {
+      "type": "world_issue",
+      "question": "What do you believe is the most significant issue facing young women today, and how would you address it as a pageant winner?"
+    },
+    {
+      "type": "closing",
+      "question": "You've given us a lot to think about today. Before we conclude, do you have any final words or questions about the competition or next steps?"
+    }
+  ],
+  "interview_duration": 1,
+  "created_at": "2025-04-13T12:20:12.819629"
+}

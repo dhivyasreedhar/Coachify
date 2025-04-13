@@ -1,0 +1,27 @@
+{
+  "history": [
+    {
+      "speaker": "interviewer",
+      "text": "Welcome, Contestant! It's great to have you with us. To start, could you tell us a little about your journey and what motivated you to participate in this pageant?",
+      "timestamp": 1744557351.741051,
+      "question_type": "introduction"
+    },
+    {
+      "speaker": "contestant",
+      "text": "Thank you for the warm welcome! My journey to this pageant has been a transformative path of personal growth and self-discovery. Growing up in a small town in Oregon, I've always been passionate about community service and personal development. What truly motivated me to participate in this pageant was the opportunity to create a platform for meaningful change and to challenge myself beyond my comfort zone.\n\nThroughout my high school years, I struggled with self-confidence, often feeling like my voice didn't matter. But through dedicated volunteering with local youth programs and participating in leadership workshops, I discovered the power of authentic self-expression. This pageant represents more than just a competition to me\u2014it's a chance to inspire other young women who might be facing similar struggles, to show them that their dreams and voices are valid and powerful.\n\nMy involvement in community mentorship programs has been particularly transformative. I've worked with at-risk youth, helping them develop communication skills and build self-esteem. These experiences taught me that true beauty isn't just about external appearance, but about the impact we can make in our communities. This pageant is an extension of that journey\u2014an opportunity to amplify my message of empowerment, education, and personal growth.",
+      "timestamp": 1744557385.679992,
+      "in_response_to": "introduction"
+    },
+    {
+      "speaker": "interviewer",
+      "text": "You highlighted your talent in public speaking. Could you tell us about a time when this skill gave you an edge or helped you overcome a challenge?",
+      "timestamp": 1744557385.680614,
+      "question_type": "skill"
+    }
+  ],
+  "current_index": 1,
+  "current_question_type": "skill",
+  "current_question": "You highlighted your talent in public speaking. Could you tell us about a time when this skill gave you an edge or helped you overcome a challenge?",
+  "complete": false,
+  "interview_start_time": 1744557351.741048
+}

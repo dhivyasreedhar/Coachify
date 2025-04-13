@@ -1,0 +1,233 @@
+{
+  "contestant_name": "Contestant",
+  "pageant_name": "Pageant",
+  "interview_date": "2025-04-13",
+  "overall_score": 0,
+  "presentation_score": 0.0,
+  "content_score": 0.0,
+  "confidence_score": 0.0,
+  "relevance_score": 0.0,
+  "authenticity_score": 0.0,
+  "strengths": [
+    "Participated fully in the interview process"
+  ],
+  "areas_for_improvement": [
+    "Providing more detailed responses"
+  ],
+  "notable_quotes": [
+    "it will teach me stuff"
+  ],
+  "notes": [],
+  "conversation_transcript": [
+    {
+      "speaker": "interviewer",
+      "text": "Welcome, Contestant! It's great to have you with us. To start, could you tell us a little about your journey and what motivated you to participate in this pageant?",
+      "timestamp": 1744558829.3773482,
+      "question_type": "introduction"
+    },
+    {
+      "speaker": "contestant",
+      "text": "sure",
+      "timestamp": 1744558836.603894,
+      "in_response_to": "introduction"
+    },
+    {
+      "speaker": "interviewer",
+      "text": "You highlighted your talent in public speaking. Could you tell us about a time when this skill gave you an edge or helped you overcome a challenge?",
+      "timestamp": 1744558836.603919,
+      "question_type": "skill"
+    },
+    {
+      "speaker": "contestant",
+      "text": "sure",
+      "timestamp": 1744558839.91076,
+      "in_response_to": "skill"
+    },
+    {
+      "speaker": "interviewer",
+      "text": "How do you think this skill will help you as a pageant winner?",
+      "timestamp": 1744558839.910795,
+      "question_type": "skill_follow_up"
+    },
+    {
+      "speaker": "contestant",
+      "text": "i will win",
+      "timestamp": 1744558845.638741,
+      "in_response_to": "skill"
+    },
+    {
+      "speaker": "interviewer",
+      "text": "How have you used this skill to benefit your community?",
+      "timestamp": 1744558845.638895,
+      "question_type": "skill_follow_up"
+    },
+    {
+      "speaker": "contestant",
+      "text": "courage",
+      "timestamp": 1744558851.532286,
+      "in_response_to": "skill"
+    },
+    {
+      "speaker": "interviewer",
+      "text": "How do you continue to develop this skill?",
+      "timestamp": 1744558851.5323,
+      "question_type": "skill_follow_up"
+    },
+    {
+      "speaker": "contestant",
+      "text": "persistant",
+      "timestamp": 1744558857.94869,
+      "in_response_to": "skill"
+    },
+    {
+      "speaker": "interviewer",
+      "text": "How do you adapt this skill to different situations?",
+      "timestamp": 1744558857.948904,
+      "question_type": "skill_follow_up"
+    },
+    {
+      "speaker": "contestant",
+      "text": "by using restraint",
+      "timestamp": 1744558865.523066,
+      "in_response_to": "skill"
+    },
+    {
+      "speaker": "interviewer",
+      "text": "How do you think this skill will help you as a pageant winner?",
+      "timestamp": 1744558865.523186,
+      "question_type": "skill_follow_up"
+    },
+    {
+      "speaker": "contestant",
+      "text": "it will teach me stuff",
+      "timestamp": 1744558923.957136,
+      "in_response_to": "skill"
+    },
+    {
+      "speaker": "interviewer",
+      "text": "How do you adapt this skill to different situations?",
+      "timestamp": 1744558923.957173,
+      "question_type": "skill_follow_up"
+    },
+    {
+      "speaker": "contestant",
+      "text": "um",
+      "timestamp": 1744558971.91909,
+      "in_response_to": "skill"
+    },
+    {
+      "speaker": "interviewer",
+      "text": "How have you used this skill to benefit your community?",
+      "timestamp": 1744558971.919125,
+      "question_type": "skill_follow_up"
+    },
+    {
+      "speaker": "contestant",
+      "text": "help",
+      "timestamp": 1744558976.471,
+      "in_response_to": "skill"
+    },
+    {
+      "speaker": "interviewer",
+      "text": "How do you adapt this skill to different situations?",
+      "timestamp": 1744558976.471013,
+      "question_type": "skill_follow_up"
+    },
+    {
+      "speaker": "contestant",
+      "text": "no",
+      "timestamp": 1744558980.274799,
+      "in_response_to": "skill"
+    },
+    {
+      "speaker": "interviewer",
+      "text": "How do you think this skill will help you as a pageant winner?",
+      "timestamp": 1744558980.2749581,
+      "question_type": "skill_follow_up"
+    },
+    {
+      "speaker": "contestant",
+      "text": "no",
+      "timestamp": 1744558984.09517,
+      "in_response_to": "skill"
+    },
+    {
+      "speaker": "interviewer",
+      "text": "How have you used this skill to benefit your community?",
+      "timestamp": 1744558984.0951831,
+      "question_type": "skill_follow_up"
+    },
+    {
+      "speaker": "contestant",
+      "text": "no",
+      "timestamp": 1744558986.1533709,
+      "in_response_to": "skill"
+    },
+    {
+      "speaker": "interviewer",
+      "text": "How do you think this skill will help you as a pageant winner?",
+      "timestamp": 1744558986.1533859,
+      "question_type": "skill_follow_up"
+    },
+    {
+      "speaker": "contestant",
+      "text": "no",
+      "timestamp": 1744558988.288877,
+      "in_response_to": "skill"
+    },
+    {
+      "speaker": "interviewer",
+      "text": "How do you adapt this skill to different situations?",
+      "timestamp": 1744558988.2889001,
+      "question_type": "skill_follow_up"
+    },
+    {
+      "speaker": "contestant",
+      "text": "no",
+      "timestamp": 1744558990.086554,
+      "in_response_to": "skill"
+    },
+    {
+      "speaker": "interviewer",
+      "text": "How do you think this skill will help you as a pageant winner?",
+      "timestamp": 1744558990.086571,
+      "question_type": "skill_follow_up"
+    },
+    {
+      "speaker": "contestant",
+      "text": "j",
+      "timestamp": 1744558992.543205,
+      "in_response_to": "skill"
+    },
+    {
+      "speaker": "interviewer",
+      "text": "Can you describe a situation where this skill was particularly valuable?",
+      "timestamp": 1744558992.543222,
+      "question_type": "skill_follow_up"
+    },
+    {
+      "speaker": "contestant",
+      "text": "sa",
+      "timestamp": 1744558993.2579641,
+      "in_response_to": "skill"
+    },
+    {
+      "speaker": "interviewer",
+      "text": "How have you used this skill to benefit your community?",
+      "timestamp": 1744558993.257976,
+      "question_type": "skill_follow_up"
+    },
+    {
+      "speaker": "contestant",
+      "text": "as",
+      "timestamp": 1744558994.127646,
+      "in_response_to": "skill"
+    },
+    {
+      "speaker": "interviewer",
+      "text": "How do you continue to develop this skill?",
+      "timestamp": 1744558994.1276622,
+      "question_type": "skill_follow_up"
+    }
+  ]
+}

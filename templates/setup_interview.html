@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+
+{% block title %}Setup Pageant Interview{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <h1 class="display-6">Pageant Interview Preparation</h1>
+            <p class="lead text-muted">Create a personalized coaching session to help you shine on stage.</p>
+        </div>
+    </div>
+
+    <form id="setupForm">
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Pageant Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="pageantProfile" class="form-label">Pageant Details</label>
+                            <textarea class="form-control" id="pageantProfile" name="pageant_profile" rows="6" required placeholder="Provide details about the pageant: name, theme, core values, current social issues of focus"></textarea>
+                            <div class="form-text">Include pageant name, core values, and current social focus.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Contestant Profile</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="contestantProfile" class="form-label">Your Background</label>
+                            <textarea class="form-control" id="contestantProfile" name="contestant_profile" rows="8" required placeholder="Share your background, achievements, skills, community involvement, and personal goals"></textarea>
+                            <div class="form-text">Include your skills, experiences, community service, and personal aspirations.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Interview Settings</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="interviewDuration" class="form-label">Interview Duration (minutes)</label>
+                            <input type="number" class="form-control" id="interviewDuration" name="interview_duration" min="1" max="60" value="30">
+                            <div class="form-text">Recommended: 15-30 minutes. Maximum 60 minutes.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <a href="/" class="btn btn-outline-secondary">Cancel</a>
+            <button type="submit" class="btn btn-primary" id="setupButton">
+                <span class="spinner-border spinner-border-sm d-none" id="setupSpinner" role="status" aria-hidden="true"></span>
+                Start Interview Preparation
+            </button>
+        </div>
+    </form>
+</div>
+
+<div class="modal fade" id="processingModal" tabindex="-1" aria-labelledby="processingModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="processingModalLabel">Preparing Your Session</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <div class="spinner-border text-primary mb-3" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <p>Creating your personalized pageant interview preparation...</p>
+                <p class="text-muted">This may take a few moments.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const setupForm = document.getElementById('setupForm');
+    const setupButton = document.getElementById('setupButton');
+    const setupSpinner = document.getElementById('setupSpinner');
+    const processingModal = new bootstrap.Modal(document.getElementById('processingModal'));
+    
+    // Sample default data for quick testing
+    document.getElementById('pageantProfile').value = `Miss Empowerment Pageant 2025
+
+Core Values:
+• Leadership
+• Community Service
+• Personal Growth
+
+Current Social Focus:
+• Women's Education Empowerment
+• Environmental Sustainability
+• Mental Health Awareness`;
+
+    document.getElementById('contestantProfile').value = `Personal Profile:
+Name: Emily Rodriguez
+Age: 22
+Hometown: Portland, Oregon
+
+Skills:
+• Public Speaking
+• Community Organizing
+• Leadership
+• Social Media Advocacy
+
+Community Involvement:
+• Founded local youth mentorship program
+• Volunteer STEM educator for girls
+• Environmental conservation activist
+
+Personal Goals:
+• Promote educational opportunities for underserved communities
+• Develop leadership programs for young women
+• Use pageant platform to raise awareness about educational inequality`;
+    
+    setupForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        // Disable button and show spinner
+        setupButton.disabled = true;
+        setupSpinner.classList.remove('d-none');
+        
+        // Show processing modal
+        processingModal.show();
+        
+        // Get form data
+        const formData = new FormData(setupForm);
+        
+        // Send data to server
+        fetch('/setup-interview', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                window.location.href = data.redirect;
+            } else {
+                alert('Error: ' + data.message);
+                setupButton.disabled = false;
+                setupSpinner.classList.add('d-none');
+                processingModal.hide();
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again.');
+            setupButton.disabled = false;
+            setupSpinner.classList.add('d-none');
+            processingModal.hide();
+        });
+    });
+});
+</script>
+{% endblock %}

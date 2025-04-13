@@ -1,0 +1,79 @@
+{
+  "contestant_name": "Emily Rodriguez",
+  "pageant_name": "Pageant",
+  "interview_date": "2025-04-13",
+  "overall_score": 52.0,
+  "presentation_score": 40.0,
+  "content_score": 60.0,
+  "confidence_score": 60.0,
+  "relevance_score": 50.0,
+  "authenticity_score": 50.0,
+  "strengths": [
+    "Participated fully in the interview process"
+  ],
+  "areas_for_improvement": [
+    "Improving clarity of communication"
+  ],
+  "notable_quotes": [
+    "Thank you so much for this incredible opportunity",
+    "Public speaking has been a cornerstone in my journey, but one moment truly stands out",
+    "The biggest challenge I faced was overcoming my own self-doubt"
+  ],
+  "notes": [],
+  "conversation_transcript": [
+    {
+      "speaker": "interviewer",
+      "text": "Welcome, Emily Rodriguez! It's great to have you with us. To start, could you tell us a little about your journey and what motivated you to participate in this pageant?",
+      "timestamp": 1744561296.1981592,
+      "question_type": "introduction"
+    },
+    {
+      "speaker": "contestant",
+      "text": "Thank you so much for this incredible opportunity. My journey to this pageant is deeply rooted in a passion for community empowerment and personal growth. Growing up in a small town in Oregon, I learned early on that true beauty is about the impact we make in the lives of others, not just external appearances.\n\nAs a first-generation college student from a working-class family, I've experienced firsthand the transformative power of education and perseverance. My path has been shaped by challenges that taught me resilience, compassion, and the importance of lifting others up. Through numerous volunteer programs and community initiatives, I've dedicated myself to creating meaningful change, particularly in youth mentorship and educational accessibility.\n\nWhat motivates me to participate in this pageant is the incredible platform it provides to amplify important conversations about community service, personal development, and social impact. I see this opportunity not as a competition, but as a powerful stage to inspire change and give voice to those who often go unheard. My background in public speaking and grassroots community organizing has prepared me to represent not just myself, but the collective hopes and potential of young women in my community.\n\nOver the past few years, I've developed leadership skills through my work with local youth programs. I've organized fundraising campaigns, facilitated leadership workshops, and created mentorship programs that have directly impacted hundreds of young lives. Each of these experiences has reinforced my belief that every individual has the potential to create positive change.\n\nThis pageant represents more than a personal milestone\u2014it's an opportunity to challenge stereotypes, inspire others, and demonstrate that true beauty is about compassion, intelligence, and the courage to make a difference. I'm not just competing; I'm here to create a ripple effect of positive change, to show that every individual has the power to transform their community and themselves.",
+      "timestamp": 1744561302.631692,
+      "in_response_to": "introduction"
+    },
+    {
+      "speaker": "interviewer",
+      "text": "Your profile mentions \u2022 Public Speaking. Could you walk us through a moment when this skill was essential to your success in a public setting?",
+      "timestamp": 1744561302.632273,
+      "question_type": "skill"
+    },
+    {
+      "speaker": "contestant",
+      "text": "Public speaking has been a cornerstone in my journey, but one moment truly stands out. I was invited to deliver a keynote speech at a women's empowerment conference attended by hundreds of young women aspiring for careers in STEM. Standing on that stage, I realized my voice had the power not just to inform, but to ignite dreams and instill confidence. By sharing my own story\u2014my challenges, victories, and lessons learned\u2014I saw firsthand how words could inspire action and create real change. After the event, several young women approached me, expressing how empowered they felt to pursue their passions. In that moment, I understood deeply that public speaking isn't just about delivering a speech; it\u2019s about connecting authentically, uplifting others, and empowering them to unlock their potential.",
+      "timestamp": 1744561311.567481,
+      "in_response_to": "skill"
+    },
+    {
+      "speaker": "interviewer",
+      "text": "What was the biggest challenge you faced during that?",
+      "timestamp": 1744561311.5678852,
+      "question_type": "skill_follow_up"
+    },
+    {
+      "speaker": "contestant",
+      "text": "The biggest challenge I faced was overcoming my own self-doubt. Before stepping on stage, I felt an intense pressure to be perfect, knowing my words carried significant responsibility",
+      "timestamp": 1744561332.957967,
+      "in_response_to": "skill"
+    },
+    {
+      "speaker": "interviewer",
+      "text": "What was the biggest challenge you faced during that?",
+      "timestamp": 1744561332.958046,
+      "question_type": "skill_follow_up"
+    },
+    {
+      "speaker": "contestant",
+      "text": "The biggest challenge I faced was overcoming my own self-doubt. Before stepping on stage, I felt an intense pressure to be perfect, knowing my words carried significant responsibility. But then, I reminded myself that authenticity matters more than perfection. I took a deep breath, leaned into my vulnerability, and chose to speak openly from the heart. That decision allowed me to truly connect with my audience, transforming anxiety into genuine impact. It taught me that the most powerful speakers aren't those who never feel nervous, but those who use their vulnerability as a strength to inspire others.",
+      "timestamp": 1744561342.109469,
+      "in_response_to": "skill"
+    },
+    {
+      "speaker": "interviewer",
+      "text": "What was the biggest challenge you faced during that?",
+      "timestamp": 1744561342.10957,
+      "question_type": "skill_follow_up"
+    }
+  ]
+}

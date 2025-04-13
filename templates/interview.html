@@ -1,0 +1,590 @@
+{% extends "base.html" %}
+
+{% block title %}AI Interview: {{ candidate_name }} - {{ job_title }}{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-12">
+        <h1>Interview Session</h1>
+        <p class="lead">
+            Candidate: {{ candidate_name }} | 
+            Position: {{ job_title }}
+            <span class="badge bg-primary ms-2" id="statusBadge">Ready</span>
+            {% if interview_duration %}
+            <span class="badge bg-secondary me-2" id="timeRemaining">
+                Time limit: {{ interview_duration|duration_format }}
+            </span>
+            {% endif %}
+        </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Interview Conversation</h5>
+            </div>
+            <div class="card-body">
+                <!-- Chat container -->
+                <div class="chat-container" id="chatContainer">
+                    <!-- Messages will be added here -->
+                </div>
+                
+                <!-- Start prompt -->
+                <div class="text-center my-5" id="startPrompt">
+                    <p class="mb-4">Ready to begin the interview?</p>
+                    <button type="button" class="btn btn-primary" id="startButton">
+                        Start Interview
+                    </button>
+                </div>
+                
+                <!-- Response form -->
+                <div class="response-form d-none" id="responseForm">
+                    <div class="mb-3">
+                        <textarea class="form-control" id="responseInput" rows="3" 
+                                  placeholder="Type your response here..."></textarea>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-primary" id="sendButton">
+                            <span class="spinner-border spinner-border-sm d-none" id="sendSpinner" role="status" aria-hidden="true"></span>
+                            Send Response
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Complete message -->
+                <div class="text-center my-5 d-none" id="completeMessage">
+                    <div class="alert alert-success">
+                        <h4>Interview Complete</h4>
+                        <p>Thank you for completing this interview.</p>
+                        <a href="/report/{{ interview_id }}" class="btn btn-primary">View Interview Report</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Time Exceeded Modal -->
+<div class="modal fade" id="timeExceededModal" tabindex="-1" aria-labelledby="timeExceededModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="timeExceededModalLabel">Interview Time Limit Reached</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>The allocated time for this interview has been reached.</p>
+                <p>Your responses have been recorded and will be evaluated.</p>
+            </div>
+            <div class="modal-footer">
+                <a href="/report/{{ interview_id }}" class="btn btn-primary">View Report</a>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block styles %}
+<style>
+    .chat-container {
+        height: 400px;
+        overflow-y: auto;
+        border: 1px solid #e9ecef;
+        border-radius: 5px;
+        padding: 15px;
+        margin-bottom: 20px;
+        background-color: #f8f9fa;
+    }
+    
+    .interviewer-message {
+        background-color: #007bff;
+        color: white;
+        border-radius: 15px 15px 15px 0;
+        padding: 10px 15px;
+        margin-bottom: 15px;
+        max-width: 80%;
+    }
+    
+    .candidate-message {
+        background-color: #6c757d;
+        color: white;
+        border-radius: 15px 15px 0 15px;
+        padding: 10px 15px;
+        margin-bottom: 15px;
+        margin-left: auto;
+        max-width: 80%;
+    }
+    
+    .typing-indicator {
+        background-color: #e9ecef;
+        border-radius: 15px;
+        padding: 10px 15px;
+        margin-bottom: 15px;
+        display: inline-block;
+        width: auto;
+    }
+    
+    .typing-indicator .dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: #777;
+        animation: wave 1.3s linear infinite;
+        margin-right: 3px;
+    }
+    
+    .typing-indicator .dot:nth-child(2) {
+        animation-delay: -1.1s;
+    }
+    
+    .typing-indicator .dot:nth-child(3) {
+        animation-delay: -0.9s;
+        margin-right: 0;
+    }
+    
+    @keyframes wave {
+        0%, 60%, 100% {
+            transform: initial;
+        }
+        30% {
+            transform: translateY(-5px);
+        }
+    }
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Basic variables
+    var interviewId = "{{ interview_id }}";
+    var interviewDuration = "{{ interview_duration|default('0')|safe }}";
+    var hasTimeLimit = parseInt(interviewDuration, 10) > 0;
+    
+    // DOM elements
+    var chatContainer = document.getElementById('chatContainer');
+    var startPrompt = document.getElementById('startPrompt');
+    var startButton = document.getElementById('startButton');
+    var responseForm = document.getElementById('responseForm');
+    var responseInput = document.getElementById('responseInput');
+    var sendButton = document.getElementById('sendButton');
+    var sendSpinner = document.getElementById('sendSpinner');
+    var statusBadge = document.getElementById('statusBadge');
+    var completeMessage = document.getElementById('completeMessage');
+    var timeRemaining = document.getElementById('timeRemaining');
+    
+    // Timer variables
+    var timerInterval = null;
+    var remainingSeconds = 0;
+    
+    // Initialize Modal
+    var timeExceededModal = null;
+    try {
+        if (document.getElementById('timeExceededModal')) {
+            timeExceededModal = new bootstrap.Modal(document.getElementById('timeExceededModal'));
+        }
+    } catch (e) {
+        console.error('Error initializing modal:', e);
+    }
+    
+    // Speech synthesis setup
+    var synth = null;
+    var voices = [];
+    try {
+        synth = window.speechSynthesis;
+        if (synth) {
+            // Try to populate voices initially
+            voices = synth.getVoices();
+            
+            // Set up voice change event
+            if (synth.onvoiceschanged !== undefined) {
+                synth.onvoiceschanged = function() {
+                    voices = synth.getVoices();
+                    // Filter for English voices
+                    if (voices && voices.length > 0) {
+                        var englishVoices = [];
+                        for (var i = 0; i < voices.length; i++) {
+                            if (voices[i].lang && voices[i].lang.indexOf('en') !== -1) {
+                                englishVoices.push(voices[i]);
+                            }
+                        }
+                        if (englishVoices.length > 0) {
+                            voices = englishVoices;
+                        }
+                    }
+                };
+            }
+        }
+    } catch (e) {
+        console.warn('Speech synthesis not available:', e);
+    }
+    
+    // Function to add message to chat
+    function addMessage(text, isInterviewer) {
+        if (!chatContainer) return;
+        
+        var messageDiv = document.createElement('div');
+        messageDiv.className = isInterviewer ? 'interviewer-message' : 'candidate-message';
+        messageDiv.textContent = text;
+        chatContainer.appendChild(messageDiv);
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+    
+    // Function to add typing indicator
+    function showTypingIndicator() {
+        if (!chatContainer) return;
+        
+        // Check if indicator already exists
+        if (document.getElementById('typingIndicator')) {
+            return;
+        }
+        
+        var indicatorDiv = document.createElement('div');
+        indicatorDiv.className = 'typing-indicator';
+        indicatorDiv.id = 'typingIndicator';
+        
+        var dot1 = document.createElement('span');
+        dot1.className = 'dot';
+        var dot2 = document.createElement('span');
+        dot2.className = 'dot';
+        var dot3 = document.createElement('span');
+        dot3.className = 'dot';
+        
+        indicatorDiv.appendChild(dot1);
+        indicatorDiv.appendChild(dot2);
+        indicatorDiv.appendChild(dot3);
+        
+        chatContainer.appendChild(indicatorDiv);
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+    
+    // Function to remove typing indicator
+    function hideTypingIndicator() {
+        var indicator = document.getElementById('typingIndicator');
+        if (indicator && indicator.parentNode) {
+            indicator.parentNode.removeChild(indicator);
+        }
+    }
+    
+    // Function to speak text using speech synthesis
+    function speakText(text) {
+        try {
+            if (!synth || !text) return;
+            
+            // Cancel any ongoing speech
+            if (synth.speaking) {
+                synth.cancel();
+            }
+            
+            var utterance = new SpeechSynthesisUtterance(text);
+            
+            // Set voice if available
+            if (voices && voices.length > 0) {
+                utterance.voice = voices[0];
+            }
+            
+            utterance.pitch = 1;
+            utterance.rate = 1;
+            synth.speak(utterance);
+        } catch (e) {
+            console.warn('Error with speech synthesis:', e);
+        }
+    }
+    
+    // Function to format time as mm:ss
+    function formatTime(seconds) {
+        var minutes = Math.floor(seconds / 60);
+        var secs = seconds % 60;
+        if (secs < 10) {
+            secs = '0' + secs;
+        }
+        return minutes + ':' + secs;
+    }
+    
+    // Function to update timer display
+    function updateTimer() {
+        if (remainingSeconds <= 0) {
+            clearInterval(timerInterval);
+            
+            if (timeRemaining) {
+                timeRemaining.innerHTML = "Time's up!";
+                timeRemaining.className = 'badge bg-danger me-2';
+            }
+            
+            // Disable response input
+            if (responseInput) {
+                responseInput.disabled = true;
+            }
+            
+            if (sendButton) {
+                sendButton.disabled = true;
+            }
+            
+            // Show time exceeded modal
+            if (timeExceededModal) {
+                try {
+                    timeExceededModal.show();
+                } catch (e) {
+                    console.error('Error showing modal:', e);
+                }
+            }
+            
+            return;
+        }
+        
+        remainingSeconds--;
+        
+        // Update display
+        if (timeRemaining) {
+            timeRemaining.innerHTML = 'Time remaining: ' + formatTime(remainingSeconds);
+            
+            // Change color when time is running low
+            if (remainingSeconds < 60) {
+                timeRemaining.className = 'badge bg-danger me-2';
+            } else if (remainingSeconds < 180) {
+                timeRemaining.className = 'badge bg-warning me-2';
+            }
+        }
+    }
+    
+    // Function to start timer
+    function startTimer(seconds) {
+        if (!hasTimeLimit || !timeRemaining) return;
+        
+        remainingSeconds = seconds;
+        if (timeRemaining) {
+            timeRemaining.innerHTML = 'Time remaining: ' + formatTime(remainingSeconds);
+        }
+        
+        clearInterval(timerInterval);
+        timerInterval = setInterval(updateTimer, 1000);
+    }
+    
+    // Function to start interview
+    function startInterviewHandler() {
+        if (startPrompt) {
+            startPrompt.classList.add('d-none');
+        }
+        
+        if (statusBadge) {
+            statusBadge.textContent = 'In Progress';
+            statusBadge.className = 'badge bg-success';
+        }
+        
+        showTypingIndicator();
+        
+        // Use fetch API to start interview
+        fetch('/api/start-interview', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ interview_id: interviewId })
+        })
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+            hideTypingIndicator();
+            
+            if (data.status === 'success') {
+                addMessage(data.question, true);
+                
+                // Try to speak the text if enabled and available
+                try {
+                    if (synth) {
+                        speakText(data.question);
+                    }
+                } catch (error) {
+                    console.error('Error with speech synthesis:', error);
+                }
+                
+                if (responseForm) {
+                    responseForm.classList.remove('d-none');
+                }
+                
+                if (responseInput) {
+                    responseInput.focus();
+                }
+                
+                // Start timer if applicable
+                if (data.has_time_limit && data.remaining_seconds) {
+                    hasTimeLimit = true;
+                    startTimer(data.remaining_seconds);
+                }
+            } else {
+                addMessage('Error starting interview: ' + (data.message || 'Unknown error'), true);
+            }
+        })
+        .catch(function(error) {
+            hideTypingIndicator();
+            console.error('Error:', error);
+            addMessage('An error occurred while starting the interview. Please try again.', true);
+        });
+    }
+    
+    // Function to send response
+    function sendResponseHandler() {
+        if (!responseInput) return;
+        
+        var response = responseInput.value ? responseInput.value.trim() : '';
+        
+        if (!response) {
+            return;
+        }
+        
+        // Disable input and show spinner
+        if (responseInput) {
+            responseInput.disabled = true;
+        }
+        
+        if (sendButton) {
+            sendButton.disabled = true;
+        }
+        
+        if (sendSpinner) {
+            sendSpinner.classList.remove('d-none');
+        }
+        
+        // Add candidate response to chat
+        addMessage(response, false);
+        
+        // Show typing indicator
+        showTypingIndicator();
+        
+        // Use fetch API to process response
+        fetch('/api/process-response', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                interview_id: interviewId,
+                response: response
+            })
+        })
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+            hideTypingIndicator();
+            
+            if (data.status === 'success') {
+                addMessage(data.question, true);
+                
+                // Try to speak the text if enabled and available
+                try {
+                    if (synth) {
+                        speakText(data.question);
+                    }
+                } catch (error) {
+                    console.error('Error with speech synthesis:', error);
+                }
+                
+                // Update timer if applicable
+                if (hasTimeLimit && data.remaining_seconds !== null) {
+                    remainingSeconds = data.remaining_seconds;
+                }
+                
+                if (data.is_complete || data.time_limit_exceeded) {
+                    // Interview complete
+                    if (responseForm) {
+                        responseForm.classList.add('d-none');
+                    }
+                    
+                    if (completeMessage) {
+                        completeMessage.classList.remove('d-none');
+                    }
+                    
+                    if (statusBadge) {
+                        statusBadge.textContent = 'Complete';
+                        statusBadge.className = 'badge bg-info';
+                    }
+                    
+                    // Stop the timer
+                    clearInterval(timerInterval);
+                    
+                    if (data.time_limit_exceeded && timeExceededModal) {
+                        try {
+                            timeExceededModal.show();
+                        } catch (e) {
+                            console.error('Error showing modal:', e);
+                        }
+                    }
+                } else {
+                    // Continue interview
+                    if (responseInput) {
+                        responseInput.value = '';
+                        responseInput.disabled = false;
+                        responseInput.focus();
+                    }
+                    
+                    if (sendButton) {
+                        sendButton.disabled = false;
+                    }
+                }
+            } else {
+                addMessage('Error processing response: ' + (data.message || 'Unknown error'), true);
+                
+                // Re-enable input
+                if (responseInput) {
+                    responseInput.disabled = false;
+                }
+                
+                if (sendButton) {
+                    sendButton.disabled = false;
+                }
+            }
+            
+            if (sendSpinner) {
+                sendSpinner.classList.add('d-none');
+            }
+        })
+        .catch(function(error) {
+            hideTypingIndicator();
+            console.error('Error:', error);
+            addMessage('An error occurred while processing your response. Please try again.', true);
+            
+            if (responseInput) {
+                responseInput.disabled = false;
+            }
+            
+            if (sendButton) {
+                sendButton.disabled = false;
+            }
+            
+            if (sendSpinner) {
+                sendSpinner.classList.add('d-none');
+            }
+        });
+    }
+    
+    // Function for handling Enter key in text area
+    function handleKeyDown(event) {
+        if (event.key === 'Enter' && !event.shiftKey) {
+            event.preventDefault();
+            if (sendButton && !sendButton.disabled) {
+                sendResponseHandler();
+            }
+        }
+    }
+    
+    // Add event listeners
+    if (startButton) {
+        startButton.addEventListener('click', startInterviewHandler);
+    }
+    
+    if (sendButton) {
+        sendButton.addEventListener('click', sendResponseHandler);
+    }
+    
+    if (responseInput) {
+        responseInput.addEventListener('keydown', handleKeyDown);
+    }
+});
+</script>
+{% endblock %}
